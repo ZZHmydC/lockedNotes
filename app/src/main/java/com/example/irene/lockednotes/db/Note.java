@@ -2,6 +2,8 @@ package com.example.irene.lockednotes.db;
 
 import org.litepal.crud.DataSupport;
 
+import java.util.Date;
+
 /**
  * Created by Irene on 2018/1/2.
  */
@@ -12,9 +14,11 @@ public class Note extends DataSupport {
 
     private String noteName;
 
-    private int noteCode;
+    private String content;
 
-    private int folderId;
+    private String publishDate;
+
+    private boolean lock;
 
     public int getId() {
         return id;
@@ -32,20 +36,28 @@ public class Note extends DataSupport {
         this.noteName = noteName;
     }
 
-    public int getNoteCode() {
-        return noteCode;
+    public String getContent() {
+        return content;
     }
 
-    public void setNoteCode(int noteCode) {
-        this.noteCode = noteCode;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public int getFolderId() {
-        return folderId;
+    public String getPublishDate() {
+        return publishDate;
     }
 
-    public void setFolderId(int folderId) {
-        this.folderId = folderId;
+    public void setPublishDate(String publishDate) {
+        this.publishDate = publishDate;
+    }
+
+    public boolean getLock() {
+        return lock;
+    }
+
+    public void setLock(boolean lock) {
+        this.lock = lock;
     }
 
 }
