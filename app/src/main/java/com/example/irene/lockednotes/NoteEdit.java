@@ -37,10 +37,9 @@ public class NoteEdit extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         //实现背景图和状态栏融合
-        if (Build.VERSION.SDK_INT >= 21) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        }
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
 
         //防止标题栏和背景图被软键盘顶上去
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
@@ -53,6 +52,10 @@ public class NoteEdit extends AppCompatActivity {
         titleTime.setText(getTime());
 
         noteDetailEdit = (EditText) findViewById(R.id.note_detail_edit);
+        if (noteDetailEdit.getContext() != null) {
+            Note note = new Note();
+            setNoteDetail(note.getContent());
+        }
         noteDetailEdit.requestFocus();
         InputMethodManager imm = (InputMethodManager) noteDetailEdit.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(0, InputMethodManager.SHOW_FORCED);
@@ -66,6 +69,7 @@ public class NoteEdit extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //editNote();
+                hintKeyboard();
                 finish();
             }
         });
@@ -92,5 +96,17 @@ public class NoteEdit extends AppCompatActivity {
         }
     }
 
+    public void setNoteDetail(String content) {
+        noteDetailEdit.setText(content);
+    }
+
+    private void hintKeyboard() {
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        if(imm.isActive()&&getCurrentFocus()!=null){
+            if (getCurrentFocus().getWindowToken()!=null) {
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+        }
+    }
 
 }

@@ -14,6 +14,8 @@ public class Folder extends DataSupport {
 
     private int folderCode;
 
+    private boolean lock;
+
     public int getId() {
         return id;
     }
@@ -36,6 +38,14 @@ public class Folder extends DataSupport {
 
     public void setFolderCode(int folderCode) {
         this.folderCode = folderCode;
+    }
+
+    public boolean getLock() {
+        return lock;
+    }
+
+    public void setLock(boolean lock) {
+        this.lock = lock;
     }
 
 }

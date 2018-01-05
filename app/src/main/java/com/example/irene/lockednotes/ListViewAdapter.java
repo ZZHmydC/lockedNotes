@@ -33,6 +33,13 @@ public class ListViewAdapter extends ArrayAdapter<Note> {
         TextView cellTitle = (TextView) view.findViewById(R.id.cell_title);
         TextView cellContent = (TextView) view.findViewById(R.id.cell_content);
         ImageView cellLock = (ImageView) view.findViewById(R.id.cell_lock);
+        if (note.getLock() == true) {
+            cellContent.setVisibility(View.INVISIBLE);
+            cellLock.setVisibility(View.VISIBLE);
+        } else {
+            cellContent.setVisibility(View.VISIBLE);
+            cellLock.setVisibility(View.INVISIBLE);
+        }
         cellTitle.setText(note.getNoteName());
         cellContent.setText(note.getContent());
         cellLock.setImageResource(note.getId());
